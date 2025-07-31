@@ -1,1 +1,45 @@
+const int pin5 = 5;
+const int pin6 = 6;
+const int pin9 = 9;
+const int pin10 = 10; 
+
+void setup() {
+ pinMode(pin5, OUTPUT);
+ pinMode(pin6, OUTPUT);
+ pinMode(pin9, OUTPUT);
+ pinMode(pin10, OUTPUT);
+ Serial.begin(9600);
+ Serial.println("Enter: 5 <val> or 6 <val> or 9 <val> or 10 <val> (e.g. 5 128)");
+}
+
+
+void loop() {
+ if (Serial.available()) {
+   int pin = Serial.parseInt();   // First number is pin (5 6, 9, or 10)
+   int value = Serial.parseInt(); // Second number is PWM (0-255)
+
+
+   if (pin == 5 || pin == 6) {
+     analogWrite(pin, constrain(value, 0, 255));
+     Serial.print("PWM set on pin ");
+     Serial.print(pin);
+     Serial.print(" to ");
+     Serial.println(value);
+   } else {
+     Serial.println("Invalid pin. Use 5 or 6.");
+     
+  if (pin == 9 || pin == 10) {
+    analogWrite(pin, constrain(value, 0, 255));
+    Serial.print("PWM set on pin");
+    Serial.print(pin);
+    Serial.print(" to ");
+    Serial.println(value);
+  } else {
+    Serial.println("invalid pin. Use 9 or 10");
+  }
+   }
+ }
+}
+
+
 
