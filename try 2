@@ -1,0 +1,73 @@
+// Motor 1 (IBT-2 #1)
+const int RPWM_M1 = 5;  // Motor 1 Forward
+const int LPWM_M1 = 6;  // Motor 1 Backward
+
+// Motor 2 (IBT-2 #2)
+const int RPWM_M2 = 9; // Motor 2 Right
+const int LPWM_M2 = 10; // Motor 2 Left
+
+void setup() {
+  // Set Motor 1 pins as OUTPUT
+  pinMode(RPWM_M1, OUTPUT);
+  pinMode(LPWM_M1, OUTPUT);
+
+  // Set Motor 2 pins as OUTPUT
+  pinMode(RPWM_M2, OUTPUT);
+  pinMode(LPWM_M2, OUTPUT);
+
+  // Stop both motors at startup
+  analogWrite(RPWM_M1, 0);
+  analogWrite(LPWM_M1, 0);
+  analogWrite(RPWM_M2, 0);
+  analogWrite(LPWM_M2, 0);
+
+  // Initialize Serial communication
+  Serial.begin(9600);
+  Serial.println("Ready. Use W/A/S/D/K to control motors.");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char command = Serial.read();
+
+    // Stop both motors initially to ensure they don't keep running unintentionally
+    analogWrite(RPWM_M1, 0);
+    analogWrite(LPWM_M1, 0);
+    analogWrite(RPWM_M2, 0);
+    analogWrite(LPWM_M2, 0);
+
+    // Motor Control based on the command received
+    switch (command) {
+      case 'w': // Motor 1 forward
+        analogWrite(RPWM_M1, 200);  // Motor 1 forward speed
+        analogWrite(LPWM_M1, 0);
+        break;
+
+      case 's': // Motor 1 backward
+        analogWrite(RPWM_M1, 0);
+        analogWrite(LPWM_M1, 200);  // Motor 1 backward speed
+        break;
+
+      case 'a': // Motor 2 left turn
+        analogWrite(RPWM_M2, 0);
+        analogWrite(LPWM_M2, 200);  // Motor 2 left turn speed
+        break;
+
+      case 'd': // Motor 2 right turn
+        analogWrite(RPWM_M2, 200);  // Motor 2 right turn speed
+        analogWrite(LPWM_M2, 0);
+        break;
+
+      case 'k': // Stop both motors
+        analogWrite(RPWM_M1, 0);
+        analogWrite(LPWM_M1, 0);
+        analogWrite(RPWM_M2, 0);
+        analogWrite(LPWM_M2, 0);
+        break;
+
+      default:
+        Serial.println("Invalid command. Use W/A/S/D/K.");
+        break;
+    }
+  }
+}
