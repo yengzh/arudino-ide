@@ -25,6 +25,7 @@ void loop() {
      Serial.print(pin);
      Serial.print(" to ");
      Serial.println(value);
+     delay(1000)
    } else {
      Serial.println("Invalid pin. Use 5 or 6.");
      

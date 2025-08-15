@@ -18,26 +18,26 @@ void loop() {
 
     switch (command) {
       case 'w': // Move both motors forward
-       analogWrite(M1_pin1, 200);  // Motor 1 forward
+        analogWrite(M1_pin1, 200);  // Motor 1 forward
         analogWrite(M1_pin2, 0);    // Motor 1 stop
-        analogWrite(M2_pin1, 0);    // Motor 2 stop
-        analogWrite(M2_pin2, 200);  // Motor 2 backward
+        analogWrite(M2_pin1, 200);  // Motor 2 forward
+        analogWrite(M2_pin2, 0);    // Motor 2 stop
         Serial.println("Motors: forward");
         delay(1000);
         break;
 
       case 's': // Move both motors backward
-       analogWrite(M1_pin1, 0);    // Motor 1 stop
+        analogWrite(M1_pin1, 0);    // Motor 1 stop
         analogWrite(M1_pin2, 200);  // Motor 1 backward
-        analogWrite(M2_pin1, 200);  // Motor 2 forward
-        analogWrite(M2_pin2, 0);    // Motor 2 stop
+        analogWrite(M2_pin1, 0);    // Motor 2 stop
+        analogWrite(M2_pin2, 200);  // Motor 2 backward
         Serial.println("Motors: backward");
         delay(1000);
         break;
 
       case 'a': // Motor 1 left, Motor 2 right
-         analogWrite(M1_pin1, 200);  // Motor 1 forward
-        analogWrite(M1_pin2, 0);    // Motor 1 stop
+        analogWrite(M1_pin1, 0);    // Motor 1 stop
+        analogWrite(M1_pin2, 200);  // Motor 1 backward
         analogWrite(M2_pin1, 200);  // Motor 2 forward
         analogWrite(M2_pin2, 0);    // Motor 2 stop
         Serial.println("Motor 1: left, Motor 2: right");
@@ -45,8 +45,8 @@ void loop() {
         break;
 
       case 'd': // Motor 1 right, Motor 2 left
-      analogWrite(M1_pin1, 0);    // Motor 1 stop
-        analogWrite(M1_pin2, 200);  // Motor 1 backward
+        analogWrite(M1_pin1, 200);  // Motor 1 forward
+        analogWrite(M1_pin2, 0);    // Motor 1 stop
         analogWrite(M2_pin1, 0);    // Motor 2 stop
         analogWrite(M2_pin2, 200);  // Motor 2 backward
         Serial.println("Motor 1: right, Motor 2: left");
